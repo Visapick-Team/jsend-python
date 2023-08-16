@@ -22,7 +22,8 @@ class JSendLimitOffsetPagination(LimitOffsetPagination):
 
 class JSendRenderer(JSONRenderer):
     def render(self, data, accepted_media_type=None, renderer_context=None):
-        if "status" in data:
+
+        if data is not None and "status" in data:
             status = data.pop("status")
             if status == "success":
                 response_data = {"status": "success", **data}
