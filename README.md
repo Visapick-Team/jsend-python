@@ -41,3 +41,61 @@ REST_FRAMEWORK = {
 
 
 
+## FastAPI example
+main.py
+```python
+from fastapi import FastAPI
+from fastapi_pagination import add_pagination
+from router import router
+
+app = FastAPI()
+
+app.include_router(router)
+
+add_pagination(app)
+
+```
+
+router.py
+```python
+from fastapi import APIRouter
+from fastapi import Query
+from pagination import Pagination
+from response import Response
+
+router = APIRouter()
+```
+
+### single Object
+```python
+@router.get(
+    "/user",
+    response_model=Response[UserOut],
+    response_model_exclude_none=True
+    )
+async def get_user(user_id: int = Query(ge=0)):
+    user: UserOut = find_user(user_id)
+    return Response(
+        data=user,
+        status="success"  # default 'success'
+    )
+```
+
+
+### Paginated 
+```python
+@router.get(
+    "/users",
+    response_model=Pagination[UserOut],
+    response_model_exclude_none=True
+    )
+async def get_users():
+    response = paginate(users)
+    response.status = "success"  # default 'success'
+    return response
+```
+
+
+
+
+
