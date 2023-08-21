@@ -15,7 +15,10 @@ pip install git+https://github.com/Visapick-Team/jsend-python.git
 ```
 
 
-## Django example
+# Response
+
+
+### Django
 
 settings.py
 ```python
@@ -28,11 +31,11 @@ INSTALLED_APPS = [
 ```python
 REST_FRAMEWORK = {
     # jsend limit/offset pagination 
-    "DEFAULT_PAGINATION_CLASS": "jsend.utils.JSendLimitOffsetPagination",
+    "DEFAULT_PAGINATION_CLASS": "jsend.django.utils.JSendLimitOffsetPagination",
     
     # jsend response
     "DEFAULT_RENDERER_CLASSES": [
-        "jsend.utils.JSendRenderer",
+        "jsend.django.utils.JSendRenderer",
     ],
 }
 
@@ -41,7 +44,7 @@ REST_FRAMEWORK = {
 
 
 
-## FastAPI example
+### FastAPI
 main.py
 ```python
 from fastapi import FastAPI
@@ -66,7 +69,7 @@ from response import Response
 router = APIRouter()
 ```
 
-### single Object
+#### single Object
 ```python
 @router.get(
     "/user",
@@ -82,7 +85,7 @@ async def get_user(user_id: int = Query(ge=0)):
 ```
 
 
-### Paginated 
+#### Paginated 
 ```python
 @router.get(
     "/users",
@@ -99,3 +102,34 @@ async def get_users():
 
 
 
+# Exception Handling
+
+
+### Django
+
+settings.py
+```python
+REST_FRAMEWORK = {
+    # jsend exception handler
+    "EXCEPTION_HANDLER": "jsend.django.exception.jsend_exception_handler",
+    
+}
+
+```
+
+
+
+
+### FastAPI
+main.py
+```python
+from fastapi import FastAPI, HTTPException
+from api import router
+from jsend.fastapi.exception import ExceptionMiddleware
+
+app = FastAPI()
+
+app.include_router(router)
+
+ExceptionMiddleware(app)
+```
