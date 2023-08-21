@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import Optional, Any
 
 
-class JsendResponse(BaseModel):
+class JsendBase:
     status: str
     data: Any
 
@@ -16,4 +16,5 @@ class JsendResponse(BaseModel):
     offset: Optional[int]
 
 
-   
+class JsendResponse(JsendBase, BaseModel):
+    pass
