@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, Any
 
+
 class JsendBase:
     status: str
     data: Any
