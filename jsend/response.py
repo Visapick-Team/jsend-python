@@ -4,7 +4,7 @@ from typing import Optional, Any
 
 class JsendBase:
     status: str
-    data: Any
+    data: Optional[Any] = None
 
     # Error
     code: Optional[int] = None
