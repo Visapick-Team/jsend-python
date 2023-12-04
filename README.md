@@ -174,10 +174,11 @@ REST_FRAMEWORK = {
 
 ### FastAPI
 main.py
+
 ```python
 from fastapi import FastAPI, HTTPException
 from api import router
-from jsend.fastapi.exception import ExceptionMiddleware
+from jsend.jfast.exception import ExceptionMiddleware
 
 app = FastAPI()
 

@@ -4,7 +4,7 @@ from fastapi_pagination import LimitOffsetParams
 from fastapi_pagination.bases import AbstractParams, AbstractPage
 from fastapi_pagination.types import GreaterEqualOne, GreaterEqualZero
 from fastapi_pagination.utils import create_pydantic_model
-from jsend.fastapi.response import ResponseMultiple, Model
+from jfast.response import ResponseMultiple, Model
 
 class ResponsePagination(ResponseMultiple, AbstractPage[Model], Generic[Model], ABC):
     total: GreaterEqualZero
