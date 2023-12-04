@@ -1,7 +1,7 @@
 from jsend.response import JsendResponse
 from fastapi.responses import JSONResponse
 from fastapi import HTTPException
-from jsend.fastapi.exception import JSONResponse
+from jsend.jfast.exception import JSONResponse
 import os
 
 
